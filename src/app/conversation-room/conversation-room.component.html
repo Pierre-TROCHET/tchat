@@ -1,0 +1,519 @@
+<container *ngIf="conversation != null">
+    <!-- Chat -->
+    <div id="chat-1" class="chat dropzone-form-js" data-dz-url="some.php">
+
+        <!-- Chat: body -->
+        <div class="chat-body">
+
+            <!-- Chat: Header -->
+            <div class="chat-header border-bottom py-4 py-lg-6 px-lg-8">
+                <div class="container-xxl">
+
+                    <div class="row align-items-center">
+
+                        <!-- Close chat(mobile) -->
+                        <div class="col-3 d-xl-none">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <a class="text-muted px-0" style="cursor: pointer;" data-chat="open">
+                                        <i class="icon-md fe-chevron-left"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Chat photo -->
+                        <div class="col-6 col-xl-6">
+                            <div class="media text-center text-xl-left">
+                                <!--
+                            <div class="avatar avatar-sm d-none d-xl-inline-block mr-5">
+                                <img src="assets/images/avatars/11.jpg" class="avatar-img" alt="">
+                            </div>
+                            -->
+                                <div class="media-body align-self-center text-truncate">
+                                    <h6 class="text-truncate mb-n1">{{conversation.name}}</h6>
+                                    <container *ngIf="conversation.users.length > 0"><small
+                                            class="text-muted">{{conversation.users.length}} members</small></container>
+                                    <!--<small class="text-muted mx-2"> • </small>
+                                <small class="text-muted">HTML, CSS, and Javascript Help</small>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat toolbar -->
+                        <div class="col-3 col-xl-6 text-right">
+                            <ul class="nav justify-content-end">
+
+                                <li class="nav-item list-inline-item d-none d-xl-block mr-3">
+                                    <a class="nav-link text-muted px-3" style="cursor:pointer;"
+                                        data-chat-sidebar-toggle="#chat-1-members" title="Add People">
+                                        <i class="icon-md fe-user-plus"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item list-inline-item d-none d-xl-block mr-0">
+                                    <a class="nav-link text-muted px-3" style="cursor:pointer;"
+                                        data-chat-sidebar-toggle="#chat-1-info" title="Details">
+                                        <i class="icon-md fe-more-vertical"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Mobile nav -->
+                                <li class="nav-item list-inline-item d-block d-xl-none">
+                                    <div class="dropdown">
+                                        <a class="nav-link text-muted px-0" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <i class="icon-md fe-more-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+
+                                            <a class="dropdown-item d-flex align-items-center"
+                                                data-chat-sidebar-toggle="#chat-1-info">
+                                                Chat Info <span class="ml-auto pl-5 fe-more-horizontal"></span>
+                                            </a>
+
+                                            <a class="dropdown-item d-flex align-items-center"
+                                                data-chat-sidebar-toggle="#chat-1-members">
+                                                Add Members <span class="ml-auto pl-5 fe-user-plus"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Mobile nav -->
+                            </ul>
+                        </div>
+
+                    </div><!-- .row -->
+
+                </div>
+            </div>
+            <!-- Chat: Header -->
+
+            <!-- Chat: Search -->
+            <div class="collapse border-bottom px-lg-8" id="chat-1-search">
+                <div class="container-xxl py-4 py-lg-6">
+
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="Search this chat"
+                            aria-label="Search this chat">
+
+                        <div class="input-group-append">
+                            <button class="btn btn-lg btn-ico btn-secondary btn-minimal" type="submit">
+                                <i class="fe-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Chat: Search -->
+
+            <!-- Chat: Content-->
+            <div class="chat-content px-lg-8" #scrollMe >
+                <div class="container-xxl py-6 py-lg-10" >
+                    <container *ngFor="let userMessage of conversation.messages">
+
+                        <container *ngIf="!userMessage.currentUser">
+                            <!-- Message -->
+                            <div class="message" style="margin-top: 2rem;">
+                                <!-- Avatar -->
+                                <a class="avatar avatar-sm mr-4 mr-lg-5">
+                                    <img class="avatar-img" src="{{userMessage.user.pictureUrl}}" alt="">
+                                </a>
+
+                                <!-- Message: body -->
+                                <div class="message-body">
+
+                                    <!-- Message: row -->
+                                    <div class="message-row">
+                                        <div class="d-flex align-items-center">
+
+                                            <!-- Message: content -->
+                                            <div class="message-content bg-light">
+                                                <h6 class="mb-2">{{userMessage.user.name}}</h6>
+                                                <div>{{userMessage.text}}</div>
+
+                                                <div class="mt-1">
+                                                    <small
+                                                        class="opacity-65">{{userMessage.creationDate | date:'h:mm a M/d/yy'}}</small>
+                                                </div>
+                                            </div>
+                                            <!-- Message: content -->
+
+                                        </div>
+                                    </div>
+                                    <!-- Message: row -->
+
+                                </div>
+                                <!-- Message: Body -->
+                            </div>
+                            <!-- Message -->
+                        </container>
+                        <container *ngIf="userMessage.currentUser">
+                            <!-- Message -->
+                            <div class="message message-right" style="margin-top: 2rem;">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-sm ml-4 ml-lg-5 d-none d-lg-block">
+                                    <img class="avatar-img" src="{{userMessage.user.pictureUrl}}" alt="">
+                                </div>
+
+                                <!-- Message: body -->
+                                <div class="message-body">
+
+                                    <!-- Message: row -->
+                                    <div class="message-row">
+                                        <div class="d-flex align-items-center justify-content-end">
+
+                                            <!-- Message: content -->
+                                            <div class="message-content bg-primary text-white">
+                                                <div>{{userMessage.text}}</div>
+
+                                                <div class="mt-1">
+                                                    <small
+                                                        class="opacity-65">{{userMessage.creationDate | date:'h:mm a M/d/yy'}}</small>
+                                                </div>
+                                            </div>
+                                            <!-- Message: content -->
+
+                                        </div>
+                                    </div>
+                                    <!-- Message: row -->
+
+
+                                </div>
+                                <!-- Message: body -->
+                            </div>
+                            <!-- Message -->
+                        </container>
+                    </container>
+                </div>
+
+                <!-- Scroll to end -->
+                <div class="end-of-chat"></div>
+            </div>
+            <!-- Chat: Content -->
+
+            <!-- Chat: DropzoneJS container 
+            <div class="chat-files hide-scrollbar px-lg-8">
+                <div class="container-xxl">
+                    <div class="dropzone-previews-js form-row py-4"></div>
+                </div>
+            </div>
+            <!-- Chat: DropzoneJS container -->
+
+            <!-- Chat: Footer -->
+            <div class="chat-footer border-top py-4 py-lg-6 px-lg-8">
+                <div class="container-xxl">
+
+                    <form id="chat-id-1-form" data-emoji-form="" (submit)="onChatSubmit()">
+                        <div class="form-row align-items-center">
+                            <div class="col">
+                                <div class="input-group">
+
+                                    <!-- Textarea -->
+                                    <textarea id="chat-id-1-input" class="form-control bg-transparent border-0"
+                                        placeholder="Type your message..." rows="1" data-emoji-input=""
+                                        data-autosize="true" [(ngModel)]="chatMessage" [ngModelOptions]="{standalone: true}" (keydown.enter)="onChatSubmit();false"></textarea>
+
+                                    <!-- Emoji button -->
+                                    <!--
+                                    <div class="input-group-append">
+                                        <button class="btn btn-ico btn-secondary btn-minimal bg-transparent border-0"
+                                            type="button" data-emoji-btn="">
+                                            <img src="assets/images/smile.svg" data-inject-svg="" alt="">
+                                        </button>
+                                    </div>-->
+
+                                    <!-- Upload button -->
+                                    <!-- 
+                                    <div class="input-group-append">
+                                        <button id="chat-upload-btn-1"
+                                            class="btn btn-ico btn-secondary btn-minimal bg-transparent border-0 dropzone-button-js"
+                                            type="button">
+                                            <img src="assets/images/paperclip.svg" data-inject-svg="" alt="">
+                                        </button>
+                                    </div>-->
+
+                                </div>
+
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="col-auto">
+                                <button class="btn btn-ico btn-primary rounded-circle" type="submit" [disabled]="!chatMessage">
+                                    <span class="fe-send"></span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <!-- Chat: Footer -->
+        </div>
+        <!-- Chat: body -->
+
+        <!-- Chat Details -->
+        <div id="chat-1-info" class="chat-sidebar">
+            <div class="d-flex h-100 flex-column">
+
+                <!-- Header -->
+                <div class="border-bottom py-4 py-lg-6">
+                    <div class="container-fluid">
+
+                        <ul class="nav justify-content-between align-items-center">
+                            <!-- Close sidebar -->
+                            <li class="nav-item list-inline-item">
+                                <a class="nav-link text-muted px-0" style="cursor: pointer;" data-chat-sidebar-close="">
+                                    <i class="icon-md fe-chevron-left"></i>
+                                </a>
+                            </li>
+
+                            <!-- Title(mobile) -->
+                            <li class="text-center d-block d-lg-none">
+                                <h6 class="mb-n2">{{conversation.name}}</h6>
+                                <small class="text-muted">Chat Details</small>
+                            </li>
+
+                            <!-- Dropdown -->
+                            <!--
+                            <li class="nav-item list-inline-item">
+                                <div class="dropdown">
+                                    <a class="nav-link text-muted px-0" href="#" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="icon-md fe-sliders"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            Mute
+                                            <span class="ml-auto fe-bell"></span>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            Delete
+                                            <span class="ml-auto fe-trash-2"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>-->
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- Header -->
+
+                <!-- Body -->
+                <div class="hide-scrollbar flex-fill">
+
+                    <div class="border-bottom text-center py-9 px-10">
+                        <!-- Photo -->
+                        <!--
+                        <div class="avatar avatar-xl mx-5 mb-5">
+                            <img class="avatar-img" src="assets/images/avatars/11.jpg" alt="">
+                        </div> -->
+                        <h5>{{conversation.name}}</h5>
+                        <container *ngIf="conversation.users.length > 0">
+                            <p class="text-muted">{{conversation.creationDate | date:'h:mm a M/d/yy'}}</p>
+                            <p class="text-muted">{{conversation.users.length}} members : </p>
+                        </container>
+                        <!--<p class="text-muted">Bootstrap is an open source toolkit for developing web with HTML, CSS, and
+                            JS.</p> -->
+                    </div>
+
+                    <!-- Navs -->
+                    <!--
+                    <ul class="nav nav-tabs nav-justified bg-light rounded-0" role="tablist">
+                        <li class="nav-item">
+                            <a href="#chat-id-1-members" class="nav-link active" data-toggle="tab" role="tab"
+                                aria-selected="true">Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#chat-id-1-files" class="nav-link" data-toggle="tab" role="tab">Files</a>
+                        </li>
+                    </ul>-->
+                    <!-- Navs -->
+
+                    <div class="tab-content">
+                        <!-- Members -->
+                        <div id="chat-id-1-members" class="tab-pane fade show active">
+                            <ul class="list-group list-group-flush list-group-no-border-first">
+                                <!-- Member -->
+                                <li class="list-group-item py-6" *ngFor="let userConversation of conversation.users">
+                                    <div class="media align-items-center">
+
+
+                                        <div class="avatar avatar-sm mr-5">
+                                            <img class="avatar-img" src="{{userConversation.pictureUrl}}"
+                                                alt="{{userConversation.name}}">
+                                        </div>
+
+
+                                        <div class="media-body">
+                                            <h6 class="mb-0">
+                                                <a class="text-reset">{{userConversation.name}}</a>
+                                            </h6>
+                                            <!--<small class="text-muted">Online</small>-->
+                                        </div>
+                                        <!--
+                                        <div class="align-self-center ml-5">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-sm btn-ico btn-link text-muted w-auto"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fe-more-vertical"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        Promote <span class="ml-auto fe-trending-up"></span>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        Restrict <span class="ml-auto fe-trending-down"></span>
+                                                    </a>
+                                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        Delete <span class="ml-auto fe-user-x"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>-->
+
+                                    </div>
+                                </li>
+                                <!-- Member -->
+                            </ul>
+                        </div>
+                        <!-- Members -->
+                    </div>
+                </div>
+                <!-- Body -->
+
+            </div>
+        </div>
+        <!-- Chat Details -->
+
+        <!-- New members -->
+        <div id="chat-1-members" class="chat-sidebar">
+            <form [formGroup]="formAddUser" (ngSubmit)="submitForm()">
+                <div class="d-flex h-100 flex-column">
+
+                    <!-- Header -->
+                    <div class="border-bottom py-4 py-lg-6">
+                        <div class="container-fluid">
+
+                            <ul class="nav justify-content-between align-items-center">
+                                <!-- Close sidebar -->
+                                <li class="nav-item">
+                                    <a class="nav-link text-muted px-0" style="cursor: pointer;" data-chat-sidebar-close="">
+                                        <i class="icon-md fe-chevron-left"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Title(mobile) -->
+                                <li class="text-center d-block d-lg-none">
+                                    <h6 class="mb-n2">{{conversation.name}}</h6>
+                                    <small class="text-muted">Add Members</small>
+                                </li>
+
+                                <!-- Dropdown -->
+                                <!--
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="nav-link text-muted px-0" href="#" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="icon-md fe-sliders"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            Mute
+                                            <span class="ml-auto fe-bell"></span>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            Delete
+                                            <span class="ml-auto fe-trash-2"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>-->
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- Header -->
+
+                    <!-- Body -->
+                    <div class="hide-scrollbar flex-fill">
+                        <!-- Search -->
+                        <div class="border-bottom py-7">
+                            <div class="container-fluid">
+
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-lg"
+                                            placeholder="Search for users..." aria-label="Search users..." [(ngModel)]="term" name="blabla">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-lg btn-ico btn-secondary btn-minimal" type="submit">
+                                                <i class="fe-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <!-- Search -->
+
+                        <!-- Members -->
+                        <ul class="list-group list-group-flush">
+
+                            <!-- Member -->
+                            <li class="list-group-item py-6" *ngFor="let otherUser of otherUsers | filter:term">
+                                <div class="media align-items-center">
+
+
+                                    <div class="avatar avatar-sm mr-5">
+                                        <img class="avatar-img" src="{{otherUser.pictureUrl}}" alt="{{otherUser.name}}">
+                                    </div>
+
+
+                                    <div class="media-body">
+                                        <h6 class="mb-0">{{otherUser.name}}</h6>
+                                        <!--<small class="text-muted">Online</small>-->
+                                    </div>
+
+                                    <div class="align-self-center ml-auto">
+                                        <div class="custom-control custom-radio">
+                                            <input (change)="submitOtherUsersOk=true" class="custom-control-input" id="{{otherUser.id}}"
+                                                formControlName="userToAdd" name="userToAdd" type="radio" value="{{otherUser.id}}" checked="false">
+                                            <label class="custom-control-label" for="{{otherUser.id}}"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Label -->
+                                <label class="stretched-label" for="{{otherUser.id}}" ></label>
+                            </li>
+                            <!-- Member -->
+
+                        </ul>
+                        <!-- Members -->
+                    </div>
+                    <!-- Body -->
+
+                    <!-- Button -->
+                    <div class="border-top py-7">
+                        <div class="container-fluid">
+                            <button class="btn btn-lg btn-block btn-primary d-flex align-items-center" type="submit" [disabled]="!submitOtherUsersOk">
+                                Add member
+                                <span class="fe-user-plus ml-auto"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <!-- New members -->
+
+    </div>
+    <!-- Chat -->
+</container>

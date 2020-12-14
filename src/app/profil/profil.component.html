@@ -1,0 +1,120 @@
+<div class="layout">
+  <app-menu [menuItem]="'profile'"></app-menu>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="tab-content h-100" role="tablist">
+      <div class="h-100" id="tab-content-user" role="tabpanel">
+        <div class="d-flex flex-column h-100">
+
+          <div class="hide-scrollbar">
+            <div class="container-fluid py-6">
+
+              <!-- Title -->
+              <h2 class="font-bold mb-6">My Profile</h2>
+              <!-- Title -->
+
+              <!-- Card -->
+              <div class="card mb-6">
+                <div class="card-body">
+                  <div class="text-center py-6">
+                    <!-- Photo -->
+                    <div class="avatar avatar-xl mb-5">
+                      <img class="avatar-img" src="{{userDto.pictureUrl}}" alt="">
+                    </div>
+
+                    <h5>{{userDto.name}}</h5>
+                    <!--<p class="text-muted">Bootstrap is an open source toolkit for developing web with HTML.</p>-->
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+
+              <!-- Card -->
+              <div class="card mb-6">
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item px-0 py-6">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <p class="small text-muted mb-0">Email</p>
+                          <p>{{userDto.email}}</p>
+                        </div>
+                        <i class="text-muted icon-sm fe-mail"></i>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item px-0 py-6">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <p class="small text-muted mb-0">Creation Time</p>
+                          <p>{{userDto.creationDate | date:'medium'}}</p>
+                        </div>
+                        <i class="text-muted icon-sm fe-clock"></i>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item px-0 py-6">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <p class="small text-muted mb-0">Provider</p>
+                          <p>{{userDto.provider}}</p>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item px-0 py-6">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <p class="small text-muted mb-0">Provider Id</p>
+                          <p>{{userDto.providerId}}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Card -->
+
+              <!-- Card --><!--
+              <div class="card mb-6">
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-0 py-6">
+                      <a href="#" class="media text-muted">
+                        <div class="media-body align-self-center">
+                          Twitter
+                        </div>
+                        <i class="icon-sm fe-twitter"></i>
+                      </a>
+                    </li>
+
+                    <li class="list-group-item px-0 py-6">
+                      <a href="#" class="media text-muted">
+                        <div class="media-body align-self-center">
+                          Facebook
+                        </div>
+                        <i class="icon-sm fe-facebook"></i>
+                      </a>
+                    </li>
+
+                    <li class="list-group-item px-0 py-6">
+                      <a href="#" class="media text-muted">
+                        <div class="media-body align-self-center">
+                          Github
+                        </div>
+                        <i class="icon-sm fe-github"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>-->
+              <!-- Card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

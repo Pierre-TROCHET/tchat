@@ -1,0 +1,90 @@
+<div class="layout">
+    <app-menu [menuItem]="'myconversations'"></app-menu>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="tab-content h-100" role="tablist">
+            <div class="tab-pane fade h-100 show active" id="tab-content-dialogs" role="tabpanel">
+                <div class="d-flex flex-column h-100">
+
+                    <div class="hide-scrollbar">
+                        <div class="container-fluid py-6">
+
+                            <!-- Title -->
+                            <h2 class="font-bold mb-6">My conversations</h2>
+                            <!-- Title -->
+
+                            <!-- Search -->
+                            <form class="mb-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Search by conversation name..."
+                                        aria-label="Search by conversation name..." [(ngModel)]="term" name="blabla">
+
+                                </div>
+                            </form>
+                            <!-- Search -->
+
+                            <!-- Chats -->
+                            <nav class="nav d-block list-discussions-js mb-n6">
+                                <!-- Chat link -->
+                                <a class="text-reset nav-link p-0 mb-6" style="cursor: pointer" (click)="showConversation(conversation.id)"
+                                    *ngFor="let conversation of myConversations | filter:term">
+                                    <div class="card card-active-listener">
+                                        <div class="card-body">
+
+                                            <div class="media">
+
+                                                <!--
+                                            <div class="avatar mr-5">
+                                                <img class="avatar-img" src="assets/images/avatars/7.jpg" alt="Simon Hensley">
+                                            </div>-->
+
+                                                <div class="media-body overflow-hidden">
+                                                    <div class="d-flex align-items-center mb-1">
+                                                        <h6 class="text-truncate mb-0 mr-auto">{{conversation.name}}
+                                                        </h6>
+                                                        <container *ngIf="conversation.messages != null">
+                                                            <p class="small text-muted text-nowrap ml-4">
+                                                                {{conversation.messages[0].creationDate | date:'h:mm a M/d/yy'}}</p>
+                                                        </container>
+                                                        <container *ngIf="conversation.messages == null">
+                                                            <p class="small text-muted text-nowrap ml-4">
+                                                                {{conversation.creationDate | date:'h:mm a M/d/yy'}}</p>
+                                                        </container>
+                                                    </div>
+                                                    <div class="text-truncate" *ngIf="conversation.messages">
+                                                        <h6 class='d-inline'
+                                                            *ngIf="conversation.messages[0].currentUser">You:</h6>
+                                                        {{conversation.messages[0].text}}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <container *ngIf="conversation.badgeCount && conversation.badgeCount>0">
+                                            <div class="badge badge-circle badge-primary badge-border-light badge-top-right">
+                                                <span>{{conversation.badgeCount}}</span>
+                                            </div>
+                                    </container>
+                                    </div>
+                                </a>
+                                <!-- Chat link -->
+                            </nav>
+                            <!-- Chats -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar -->
+    <!-- Main Content -->
+    <div class="main" data-mobile-height="">
+        <app-conversation-room [currentConversation]="conversationId"></app-conversation-room>
+    </div>
+    <!-- Main Content -->
+    
+</div>
