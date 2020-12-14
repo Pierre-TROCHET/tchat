@@ -1,5 +1,13 @@
 # Tchat
 
+This Angular 10 project is the frontend of a chat app. 
+It communicates with a backend app by REST and Websockets. 
+The backend is made with spring boot.
+
+To see the final app, click here: https://pierre-apps.ovh/tchat/
+
+You can freely use this code.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
 
 ## Development server
